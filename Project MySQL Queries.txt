@@ -1,0 +1,115 @@
+                                          ###Adidas Sales SQL QUERIES###
+
+select * from Adidas_sales_Project;
+
+#1.Total Revenue
+
+select SUM(total_sales) as Total_Revenue from Adidas_sales_Project;
+
+#2.Total Quantity Sold
+
+select sum(Units_Sold) as QTY_sold from Adidas_sales_Project;
+
+#3.Average Order Value
+
+select sum(Total_Sales) / sum(Units_Sold) as avg_order_value from Adidas_sales_Project;
+
+#4.Day wise total order
+
+select DATENAME(DW,invoice_date) as order_day,sum(units_sold) as total_orders
+from Adidas_sales_Project
+group by DATENAME(DW,invoice_date)
+order by total_orders desc;
+
+#5.Day wise Total Sales
+
+select DATENAME(DW,invoice_date) as order_day,sum(Total_Sales) as total_saless
+from Adidas_sales_Project
+group by DATENAME(DW,invoice_date)
+order by total_saless desc;
+
+#6.Month wise total order
+
+select DATENAME(YEAR,invoice_date) as order_year,DATENAME(MONTH,invoice_date) as
+order_month,sum(Units_Sold) as total_order
+from Adidas_sales_Project
+group by DATENAME(YEAR,invoice_date),DATENAME(MONTH,invoice_date)
+order by order_year,total_order desc;
+
+#7.Month wise total sales
+
+select DATENAME(YEAR,invoice_date) as order_year,DATENAME(MONTH,invoice_date) as
+order_month,sum(Total_Sales) as total_saless
+from Adidas_sales_Project
+group by DATENAME(YEAR,invoice_date),DATENAME(MONTH,invoice_date)
+order by order_year,total_saless desc;
+
+#8.Total order and Total Sales By Region
+
+select Region,SUM(units_sold) as total_order,SUM(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by Region
+order by total_sale desc,total_order desc;
+
+#9. Total order and Total Sales By Product
+
+select Product,SUM(units_sold) as total_order,SUM(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by Product
+order by total_sale desc,total_order desc;
+
+#10. Total order and Total Sales By Sales method
+
+select Sales_Method,SUM(units_sold) as total_order,SUM(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by Sales_Method
+order by total_sale desc,total_order desc;
+
+#11. Total order and Total Sales By Retailer
+
+select Retailer,SUM(units_sold) as total_order,SUM(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by Retailer
+order by total_sale desc,total_order desc;
+
+#12.Top 5 state by Total Sales
+
+select top 5 State ,sum(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by State
+order by total_sale desc;
+
+#13.Top 5 State by Total Quantity sold
+
+select top 5 State ,sum(Units_Sold) as total_order 
+from Adidas_sales_Project
+group by State
+order by total_order desc;
+
+#14.Bottom 5 State by total Quantity Sales
+
+select top 5 State ,sum(Units_Sold) as total_order 
+from Adidas_sales_Project
+group by State
+order by total_order ;
+
+#15.Bottom 5 state by total Sales
+
+select top 5 State ,sum(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by State
+order by total_sale;
+
+#16. Top 5 total sales by state and city
+
+select top 5 State,City ,sum(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by State,City
+order by total_sale desc;
+
+#17.Bottom 5 total order by state and city
+
+select top 5 State,City ,sum(Total_Sales) as total_sale 
+from Adidas_sales_Project
+group by State,City
+order by total_sale ;
